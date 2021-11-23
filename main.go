@@ -45,7 +45,7 @@ func dumpToPpm(buffer *[]uint, filename string, width, height int) error {
 func main() {
 	WIDTH := 800
 	HEIGHT := 600
-	FOREGROUND := 0xFFFFF
+	FOREGROUND := 0xFFFFFF
 	BACKGROUND := 0x000000
 	var buffer = make([]uint, WIDTH*HEIGHT)
 	writeCircle(&buffer, WIDTH, HEIGHT, FOREGROUND, BACKGROUND, HEIGHT/2)
