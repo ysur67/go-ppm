@@ -31,9 +31,9 @@ func dumpToPpm(buffer *[]uint, filename string, width, height int) error {
 	for y := 0; y < height; y++ {
 		for x := 0; x < width; x++ {
 			pixel := (*buffer)[y*width+x]
-			r := pixel >> 8 * 0 & 0xFF
-			g := pixel >> 8 * 1 & 0xFF
-			b := pixel >> 8 * 2 & 0xFF
+			r := (pixel >> 16) & 0xFF
+			g := (pixel >> 8) & 0xFF
+			b := pixel & 0xFF
 			file.WriteString(fmt.Sprintf("%d %d %d \n", r, g, b))
 		}
 	}
@@ -43,8 +43,8 @@ func dumpToPpm(buffer *[]uint, filename string, width, height int) error {
 func main() {
 	WIDTH := 800
 	HEIGHT := 600
-	var FOREGROUND uint = 0xFFFFFF
-	var BACKGROUND uint = 0x000000
+	var FOREGROUND uint = 0x00aa00
+	var BACKGROUND uint = 0x110000
 	var buffer = make([]uint, WIDTH*HEIGHT)
 	writeCircle(&buffer, WIDTH, HEIGHT, FOREGROUND, BACKGROUND, HEIGHT/2)
 	if err := dumpToPpm(&buffer, "circle.ppm", WIDTH, HEIGHT); err != nil {
